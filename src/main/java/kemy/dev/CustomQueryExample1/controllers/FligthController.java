@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 /*has a FlightController:
@@ -29,10 +30,26 @@ public class FligthController {
     //all the string values are randomly generated (using random.ints())
 
 
-    @GetMapping("/create")
+    @GetMapping("/defaultList")
     public List<Fligth> createFligths(){
        return fligthService.createFligths();
          }
+    @GetMapping("/{id}")
+    public Optional<Fligth> getSingleFligth(@PathVariable long id){
+        return fligthService.getSingleFligth(id);
+    }
+    @GetMapping("/all")
+    public List<Fligth> getAllFligths(){
+        return fligthService.getAllFligths();
+    }
+    @PostMapping("/post")
+    public Fligth createFligth(@RequestBody Fligth fligth){
+        return fligthService.createFLigth(fligth);
+    }
+    @DeleteMapping("")
+    public String deleteAllFligths(){
+        return fligthService.deleteAllFligths();
+    }
 
 
 }
