@@ -34,17 +34,19 @@ public class FligthService {
     }
 
 
-    public List<Fligth> createFligths(){
+    public List<Fligth> createFligths(int numberOfFligths){
         List<Fligth> fligthList=new ArrayList<>();
-        for (int i=0;i<50;i++){
-            fligthList.add(new Fligth((long) i,generateRandomValueForFlight(),generateRandomValueForFlight(),
+        if (numberOfFligths==0)
+            numberOfFligths=100;
+        for (int i=0;i<numberOfFligths;i++){
+            fligthList.add(new Fligth(generateRandomValueForFlight(),generateRandomValueForFlight(),
                     generateRandomValueForFlight(), Status.randomStatus()));
         }
         flightRepository.saveAllAndFlush(fligthList);
         return fligthList;
     }
 
-    public Optional<Fligth> getSingleFligth(@PathVariable long id){
+    public Optional<Fligth> getSingleFlight(@PathVariable long id){
 
         if(flightRepository.existsById(id)){
 

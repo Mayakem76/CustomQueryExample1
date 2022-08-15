@@ -22,9 +22,9 @@ test the 2 endpoints with Postman
 ***************************************
 upgrade FlightController:
 mapped on flights
-for the provisioning of n flights (where n is an optional query param; if absent, n=100):
-all the string values are randomly generated (using random.ints())
-the status is generated randomly
+for the provisioning of n flights (where n is an optional query param; if absent, n=100): *
+all the string values are randomly generated (using random.ints()) *
+the status is generated randomly *
 for retrieving all the flights in the db using pagination and returning them in ascending order by fromAirport
 for retrieving all the flights that are ONTIME without using a custom query
 for retrieving - using a custom query - all the flights that are in p1 or in p2 status
@@ -54,6 +54,13 @@ public class Fligth {
 
     public Fligth(Long id, String description, String fromAirport, String toAirport, Status status) {
         this.id = id;
+        this.description = description;
+        this.fromAirport = fromAirport;
+        this.toAirport = toAirport;
+        this.status = status;
+    }
+    public Fligth( String description, String fromAirport, String toAirport, Status status) {
+
         this.description = description;
         this.fromAirport = fromAirport;
         this.toAirport = toAirport;
