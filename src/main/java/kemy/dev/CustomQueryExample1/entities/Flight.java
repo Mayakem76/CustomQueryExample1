@@ -1,5 +1,7 @@
 package kemy.dev.CustomQueryExample1.entities;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 
 
@@ -10,10 +12,13 @@ public class Flight {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @ApiModelProperty(value = "Description of type of Flight",example = "Intercontinental")
     private String description;
+    @ApiModelProperty(value = "Airport of departure",example = "Milan")
     private String departures;
+    @ApiModelProperty(value = "Airport of arrival",example = "NewYork")
     private String arrivals;
+    @ApiModelProperty(value = "Status of flight ",example = "ONTIME")
     @Enumerated(EnumType.STRING)
     private  Status status;
 

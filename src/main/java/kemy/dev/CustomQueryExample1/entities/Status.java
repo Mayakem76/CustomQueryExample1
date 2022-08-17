@@ -5,7 +5,7 @@ import java.util.Random;
 
 public enum Status {
     ONTIME,
-    DELAYED,
+    DELAY,
     CANCELLED;
 
     private static final Random PRNG = new Random();
