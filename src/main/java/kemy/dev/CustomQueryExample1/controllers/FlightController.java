@@ -1,54 +1,62 @@
 package kemy.dev.CustomQueryExample1.controllers;
 
-import kemy.dev.CustomQueryExample1.entities.Fligth;
-import kemy.dev.CustomQueryExample1.services.FligthService;
+import kemy.dev.CustomQueryExample1.entities.Flight;
+import kemy.dev.CustomQueryExample1.entities.Status;
+import kemy.dev.CustomQueryExample1.services.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-/*has a FlightController:
-mapped on flights
-for the provisioning of 50 flights where:
-all the string values are randomly generated (using random.ints())
-the default status is ON_TIME
-for retrieving all the flights in the db
 
- */
 @RestController
 @RequestMapping("/flights")
 public class FlightController {
 
     @Autowired
-    public FligthService fligthService;
-
-    //all the string values are randomly generated (using random.ints())
+    public FlightService flightService;
 
     @GetMapping("/generate")
-    public List<Fligth> create100Flights() {
-    return fligthService.createFligths(100);
+    public List<Flight> create100Flights() {
+    return flightService.createFlights(100);
     }
     @GetMapping("generate/{numberOfFlights}")
-    public List<Fligth> createFlights(@PathVariable int numberOfFlights) {
-
-        return fligthService.createFligths(numberOfFlights);
+    public List<Flight> getSingleFlight(@PathVariable int numberOfFlights) {
+        return flightService.createFlights(numberOfFlights);
     }
     @GetMapping("/{id}")
-    public Optional<Fligth> getSingleFlight(@PathVariable long id){
-        return fligthService.getSingleFlight(id);
+    public Optional<Flight> getSingleFlight(@PathVariable long id){
+        return flightService.getSingleFlight(id);
     }
     @GetMapping("/all")
-    public List<Fligth> getAllFlights(){
-        return fligthService.getAllFligths();
+    public List<Flight> getAllFlights(){
+        return flightService.getAllFlights();
     }
+    @GetMapping("/onTime")
+    public List<Flight> getFlightsOnTime(){
+        return flightService.getFlightsOnTime();
+    }
+    @GetMapping("/customStatus")
+    public List<Flight> getCustomStatus(@RequestParam Status p1, @RequestParam(required = false) Status p2) {
+        return flightService.customSelectStatus(p1,p2) ;
+    }
+    @GetMapping("/departures")
+    public List<Flight> getPaginatedByDeparture(@RequestParam int pageNumber, int size){
+        return flightService.getPaginatedByDeparture(pageNumber,size);
+    }
+
     @PostMapping("/post")
-    public Fligth createFlight(@RequestBody Fligth fligth){
-        return fligthService.createFLigth(fligth);
+    public Flight postNewFlight(@RequestBody Flight flight){
+        return flightService.createFlight(flight);
     }
     @DeleteMapping("")
     public String deleteAllFlights(){
-        return fligthService.deleteAllFligths();
+        return flightService.deleteAllFlights();
+    }
+    @DeleteMapping("/{id}")
+    public String deleteSingleFlight(@PathVariable long id){
+        return flightService.deleteSingleFlight(id);
     }
 
 

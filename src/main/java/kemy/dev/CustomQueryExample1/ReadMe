@@ -1,0 +1,25 @@
+
+Example of  - Spring Boot - Custom Queries
+has an entity Flight with the following columns:
+a primary key
+a string description
+a string fromAirport
+a string toAirport
+an enum status with (ONTIME, DELAYED and CANCELLED) values
+has a dedicated repository with custom methods
+has a FlightController mapped on flights;
+has a FlightService with all the methods for controller;
+- for the provisioning of n flights (where n is an optional query param; if absent, n=100):
+  all the string values are randomly generated (using random.ints())
+  the status is generated randomly
+- for retrieving all the flights in the db using pagination and returning them in ascending order by Departures
+- for retrieving all the flights that are ONTIME without using a custom query
+- for retrieving - using a custom query - all the flights that are in Status p1 or in Status p2
+  consider that the user has to pass p1 and p2 as parameters to the GET request
+tested  endpoints with Postman:
+for provisioning without the n query parameter
+for provisioning with the n query parameter, with value 49
+for getting the flights using pagination
+for getting the flights that are ONTIME
+for getting the delayed or cancelled flights
+for getting the on time or delayed flights
